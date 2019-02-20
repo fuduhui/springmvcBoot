@@ -2,6 +2,7 @@ package com.config;
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,8 +16,8 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 
 @Configuration
-@EnableTransactionManagement
-public class AppConfig implements TransactionManagementConfigurer {
+@MapperScan("com.dao")
+public class AppConfig  {
 
 
     @Bean
@@ -59,17 +60,5 @@ public class AppConfig implements TransactionManagementConfigurer {
 
     }
 
-    @Bean
-    public MapperScannerConfigurer scannerConfigurer(){
-        MapperScannerConfigurer scannerConfigurer=new MapperScannerConfigurer();
-        scannerConfigurer.setBasePackage("com.dao");
-        scannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-        return scannerConfigurer;
-    }
 
-
-    @Override
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
-        return transactionManager();
-    }
 }
