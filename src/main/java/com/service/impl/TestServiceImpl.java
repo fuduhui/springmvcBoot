@@ -2,7 +2,6 @@ package com.service.impl;
 
 import com.dao.EmpDao;
 import com.dao.PurchaseDao;
-import com.dao.TestDao;
 import com.model.Emp;
 import com.model.Purchase;
 import com.service.ITestService;
@@ -23,8 +22,6 @@ import java.util.Map;
 @Service
 public class TestServiceImpl implements ITestService {
 
-    @Resource
-    private TestDao testDao;
 
     @Resource
     private EmpDao empDao;
@@ -36,11 +33,6 @@ public class TestServiceImpl implements ITestService {
     private DataSourceTransactionManager  txManager;
 
     @Override
-    public List<Emp> test() throws Exception {
-        return testDao.listEmp();
-    }
-
-    @Override
     public Emp getEmp(String name) throws Exception {
         Map<String,Object> param=new HashMap<>();
         param.put("name",name);
@@ -48,7 +40,7 @@ public class TestServiceImpl implements ITestService {
     }
 
   @Transactional(propagation= Propagation.REQUIRED,rollbackFor=Exception.class)
-    public void insertWithNoTrans(Emp emp, Purchase purchase) throws Exception {
+    public void testTrans(Emp emp, Purchase purchase) throws Exception {
         int k=1;
         empDao.insertEmp(emp);
         int j=5/k;
@@ -56,7 +48,7 @@ public class TestServiceImpl implements ITestService {
     }
 
     //以编程方式控制事务
- /*  public void insertWithNoTrans(Emp emp, Purchase purchase) {
+ /*  public void testTrans(Emp emp, Purchase purchase) {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 

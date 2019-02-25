@@ -25,24 +25,7 @@ public class TestController {
     private ITestService testService;
 
 
-    @RequestMapping("/test")
-    public String test(){
-        return "test";
-    }
 
-
-
-    @RequestMapping(value = "/queryDb")
-    @ResponseBody
-    public List<Emp> queryDb() {
-        try {
-            List<Emp> list= testService.test();
-            return list;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     @RequestMapping(value = "/queryDbByMybatis")
     @ResponseBody
@@ -67,7 +50,7 @@ public class TestController {
             Purchase purParam=new Purchase();
             purParam.setName(purName);
             purParam.setMoney(money);
-            testService.insertWithNoTrans(empParam,purParam);
+            testService.testTrans(empParam,purParam);
             return "success";
         }catch (Exception e){
             e.printStackTrace();
