@@ -8,6 +8,9 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 采用回调方式生成excel数据
+ */
 public class PoiWithCallBack {
 
     public static void main(String[] args) throws Exception{

@@ -7,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.*;
 
+/**
+ * 不采用回调方式生成excel数据
+ */
 public class PoiNoCallBack {
 
     public static void main(String[] args) throws Exception{
