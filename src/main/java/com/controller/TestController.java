@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TestController {
@@ -33,6 +34,30 @@ public class TestController {
         try {
              Emp emp= testService.getEmp(name);
             return emp;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/queryAllEmp")
+    @ResponseBody
+    public List<Emp> queryAllEmp() {
+        try {
+            List<Emp> list= testService.getAllEmp();
+            return list;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/queryAllEmpWithMap")
+    @ResponseBody
+    public Map<String,Emp> queryAllEmpWithMap() {
+        try {
+            Map<String,Emp> map= testService.getAllEmpByHandler();
+            return map;
         }catch (Exception e){
             e.printStackTrace();
         }

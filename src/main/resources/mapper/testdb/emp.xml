@@ -7,6 +7,9 @@
     <select id="getEmp" resultType="com.model.Emp" >
         select * from emp where name = #{name}
     </select>
+    <select id="getAllEmp" resultType="com.model.Emp">
+        select * from emp
+    </select>
     <insert id="insertEmp" parameterType="com.model.Emp">
         insert into emp(`name`,role) values(#{name},#{role})
     </insert>

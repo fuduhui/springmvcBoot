@@ -2,9 +2,11 @@ package com.service.impl;
 
 import com.dao.EmpDao;
 import com.dao.PurchaseDao;
+import com.dbhandler.EmpHandler;
 import com.model.Emp;
 import com.model.Purchase;
 import com.service.ITestService;
+import org.apache.ibatis.session.ResultHandler;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
@@ -39,7 +41,20 @@ public class TestServiceImpl implements ITestService {
         return empDao.getEmp(param);
     }
 
-  @Transactional(propagation= Propagation.REQUIRED,rollbackFor=Exception.class)
+    @Override
+    public List<Emp> getAllEmp() throws Exception {
+        return empDao.getAllEmp(null);
+    }
+
+    @Override
+    public Map<String, Emp> getAllEmpByHandler() throws Exception {
+        Map<String,Emp> retMap=new HashMap<>();
+        ResultHandler resultHandler=new EmpHandler(retMap);
+        empDao.getAllEmp(null,resultHandler);
+        return retMap;
+    }
+
+    @Transactional(propagation= Propagation.REQUIRED,rollbackFor=Exception.class)
     public void testTrans(Emp emp, Purchase purchase) throws Exception {
         int k=1;
         empDao.insertEmp(emp);
