@@ -64,6 +64,19 @@ public class TestController {
         return null;
     }
 
+    @RequestMapping(value = "/deadRepeat")
+    @ResponseBody
+    public String badCpu() {
+        try {
+            while (true){
+                int k=0;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @RequestMapping(value = "/testInsert")
     @ResponseBody
     public String testInsert(String empName,String role,String purName,String money) {
