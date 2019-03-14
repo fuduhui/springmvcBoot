@@ -1,17 +1,12 @@
 package com.controller;
 
-import com.dao.EmpDao;
-import com.dao.PurchaseDao;
 import com.model.Emp;
 import com.model.Purchase;
 import com.service.ITestService;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import com.util.lock.AFirst;
+import com.util.lock.BFirst;
+import com.util.lock.DeadLock;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -64,6 +59,10 @@ public class TestController {
         return null;
     }
 
+    /**
+     * 死循环
+     * @return
+     */
     @RequestMapping(value = "/deadRepeat")
     @ResponseBody
     public String badCpu() {
@@ -75,6 +74,24 @@ public class TestController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 死锁
+     * @return
+     */
+    @RequestMapping(value = "/deadLock")
+    @ResponseBody
+    public String deadLock() {
+        try {
+            Thread a = new Thread(new AFirst());
+            Thread b = new Thread(new BFirst());
+            a.start();
+            b.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "success";
     }
 
     @RequestMapping(value = "/testInsert")
