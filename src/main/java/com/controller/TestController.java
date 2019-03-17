@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,25 @@ public class TestController {
         return null;
     }
 
+    @RequestMapping(value = "/testInsert")
+    @ResponseBody
+    public String testInsert(String empName,String role,String purName,String money) {
+        try {
+            Emp empParam=new Emp();
+            empParam.setName(empName);
+            empParam.setRole(role);
+
+            Purchase purParam=new Purchase();
+            purParam.setName(purName);
+            purParam.setMoney(money);
+            testService.testTrans(empParam,purParam);
+            return "success";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * 死循环
      * @return
@@ -94,24 +114,20 @@ public class TestController {
         return "success";
     }
 
-    @RequestMapping(value = "/testInsert")
+    /**
+     * 内存溢出
+     * @return
+     */
+    @RequestMapping(value = "/outMenory")
     @ResponseBody
-    public String testInsert(String empName,String role,String purName,String money) {
-        try {
-            Emp empParam=new Emp();
-            empParam.setName(empName);
-            empParam.setRole(role);
-
-            Purchase purParam=new Purchase();
-            purParam.setName(purName);
-            purParam.setMoney(money);
-            testService.testTrans(empParam,purParam);
-            return "success";
-        }catch (Exception e){
-            e.printStackTrace();
+    public String outMenory(){
+        List<Object> list=new ArrayList<>();
+        while (true){
+            list.add(new Object());
         }
-        return null;
     }
+
+
 
 
 }
