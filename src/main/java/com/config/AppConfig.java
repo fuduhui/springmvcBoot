@@ -24,7 +24,7 @@ public class AppConfig  {
     public PooledDataSource dataSource(){
         PooledDataSource dataSource=new PooledDataSource();
         dataSource.setDriver("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong");
+        dataSource.setUrl("jdbc:mysql://192.168.0.101:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong");
         dataSource.setUsername("root");
         dataSource.setPassword("fuduhui123");
         dataSource.setPoolMaximumActiveConnections(5);
