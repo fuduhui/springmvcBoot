@@ -6,7 +6,8 @@
         </encoder>
     </appender>
 
-    <contextName>${HOSTNAME}</contextName>
+     <contextName>Boot1/${HOSTNAME}</contextName>
+
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>/log/bootA.log</file>
