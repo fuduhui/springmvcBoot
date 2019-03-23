@@ -6,6 +6,8 @@ import com.service.ITestService;
 import com.util.lock.AFirst;
 import com.util.lock.BFirst;
 import com.util.lock.DeadLock;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +23,7 @@ public class TestController {
     @Resource
     private ITestService testService;
 
-
+    private static Logger logger= LoggerFactory.getLogger(TestController.class);
 
 
     @RequestMapping(value = "/queryDbByMybatis")
@@ -125,6 +127,13 @@ public class TestController {
         while (true){
             list.add(new Object());
         }
+    }
+
+    @RequestMapping(value = "/bootALog")
+    @ResponseBody
+    public String bootALog(){
+        logger.info("bootA-controller-log");
+        return "succuss";
     }
 
 
