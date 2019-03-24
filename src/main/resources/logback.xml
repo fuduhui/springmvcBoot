@@ -17,9 +17,18 @@
         </encoder>
     </appender>
 
+    <appender name="SOCKET" class="ch.qos.logback.classic.net.SocketAppender">
+        <remoteHost>192.168.0.101</remoteHost>
+        <port>7000</port>
+        <reconnectionDelay>10000</reconnectionDelay>
+        <includeCallerData>true</includeCallerData>
+
+    </appender>
+
     <root level="info">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
+        <appender-ref ref="SOCKET" />
     </root>
 </configuration>
 

@@ -131,8 +131,8 @@ public class TestController {
 
     @RequestMapping(value = "/bootALog")
     @ResponseBody
-    public String bootALog(){
-        logger.info("bootA-controller-log");
+    public String bootALog(String log){
+        logger.info(log);
         return "succuss";
     }
 
