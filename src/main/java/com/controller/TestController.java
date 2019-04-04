@@ -24,6 +24,7 @@ public class TestController {
     private ITestService testService;
 
     private static Logger logger= LoggerFactory.getLogger(TestController.class);
+    private static Logger logger2=LoggerFactory.getLogger("logger.boot2");
 
 
     @RequestMapping(value = "/queryDbByMybatis")
@@ -136,7 +137,12 @@ public class TestController {
         return "succuss";
     }
 
-
+    @RequestMapping(value = "/boot2Log")
+    @ResponseBody
+    public String boot2Log(String log){
+        logger2.info(log);
+        return "succuss";
+    }
 
 
 }

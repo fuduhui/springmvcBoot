@@ -22,13 +22,22 @@
         <port>7000</port>
         <reconnectionDelay>10000</reconnectionDelay>
         <includeCallerData>true</includeCallerData>
+    </appender>
 
+    <logger name="logger.boot2" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="SOCKET" />
+    </logger>
+
+     <appender name="ASYNC_ROLLING_SOCKET" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="SOCKET" />
     </appender>
 
     <root level="info">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
-        <appender-ref ref="SOCKET" />
+        <appender-ref ref="SOCKET" /> <!--如果要提高性能,可以使用ASYNC_ROLLING_SOCKET,采用阻塞队列的方式 -->
     </root>
 </configuration>
 
